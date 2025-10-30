@@ -65,6 +65,14 @@ Fork, create a branch, commit changes, and submit a PR. Follow the existing code
 
 MIT License.
 
+## Fine-Tuning Platforms
+
+For fine-tuning the model, consider:
+
+- **Hugging Face Spaces**: Free, GPU-enabled, easy integration with Transformers.
+- **Google Colab**: Free GPUs for quick experiments.
+- **AWS SageMaker**: Scalable for production.
+
 ## Contact
 
 Julien-ser on GitHub.</content>

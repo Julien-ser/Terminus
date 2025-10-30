@@ -1,0 +1,12 @@
+model:
+  name: "meta-llama/Llama-3.1-1B"
+  fine_tuned_path: "models/llama3-1B-cybersec-finetuned"
+
+data:
+  raw_data_path: "data/raw"
+  processed_data_path: "data/processed"
+
+hyperparameters:
+  learning_rate: 2e-5
+  batch_size: 4
+  epochs: 3

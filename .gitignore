@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Data
+data/
+*.arrow
+
+# OS generated files
+.DS_Store
+.env

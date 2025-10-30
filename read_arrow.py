@@ -1,8 +1,13 @@
 import pyarrow as pa
 import pandas as pd
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--file_path', type=str, default='data/problem_solution_data.arrow')
+args = parser.parse_args()
 
 # Read the Arrow file
-with pa.OSFile('data/problem_solution_data.arrow', 'rb') as source:
+with pa.OSFile(args.file_path, 'rb') as source:
     table = pa.ipc.open_file(source).read_all()
 
 # Convert the table to a pandas DataFrame

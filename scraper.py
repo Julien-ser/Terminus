@@ -15,16 +15,19 @@ def save_to_arrow(data, output_file):
             writer.write_table(table)
 
 if __name__ == '__main__':
-    new_file = "/home/julien/termAI/red_blue_team_skills.md"
-    output_file = "data/nthw_data.arrow"
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--new_file', type=str, default='/home/julien/termAI/red_blue_team_skills.md')
+    parser.add_argument('--output_file', type=str, default='data/nthw_data.arrow')
+    args = parser.parse_args()
 
     # Read the new file
-    with open(new_file, 'r', encoding='utf-8', errors='ignore') as f:
+    with open(args.new_file, 'r', encoding='utf-8', errors='ignore') as f:
         new_content = f.read()
 
     # Read existing data
-    if os.path.exists(output_file):
-        with pa.OSFile(output_file, 'rb') as source:
+    if os.path.exists(args.output_file):
+        with pa.OSFile(args.output_file, 'rb') as source:
             existing_table = pa.ipc.open_file(source).read_all()
             existing_data = existing_table.to_pydict()['content']
     else:
@@ -34,5 +37,5 @@ if __name__ == '__main__':
     combined_data = existing_data + [new_content]
 
     # Save combined data
-    save_to_arrow(combined_data, output_file)
-    print(f"Successfully appended the content of {new_file} to {output_file}")
+    save_to_arrow(combined_data, args.output_file)
+    print(f"Successfully appended the content of {args.new_file} to {args.output_file}")

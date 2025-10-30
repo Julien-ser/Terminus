@@ -6,3 +6,5 @@ pyarrow
 PyYAML
 requests
 beautifulsoup4
+huggingface_hub
+datasets

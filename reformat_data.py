@@ -99,30 +99,30 @@ def process_nthw_files(path):
     return problems, outputs
 
 if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--learning_files', nargs='+', default=["/home/julien/termAI/learning_summary.md", "/home/julien/termAI/red_blue_team_skills.md"])
+    parser.add_argument('--nthw_path', type=str, default='data/NTHW')
+    parser.add_argument('--output_file', type=str, default='data/problem_solution_data.arrow')
+    args = parser.parse_args()
+
     problem_solution_data = {
         'problem_statement': [],
         'output': [],
     }
 
     # Process learning summary files
-    learning_files = [
-        "/home/julien/termAI/learning_summary.md",
-        "/home/julien/termAI/red_blue_team_skills.md",
-    ]
-
-    for file in learning_files:
+    for file in args.learning_files:
         problems, outputs = process_learning_file(file)
         problem_solution_data['problem_statement'].extend(problems)
         problem_solution_data['output'].extend(outputs)
 
     # Process NTHW files
-    nthw_path = "data/NTHW"
-    problems, outputs = process_nthw_files(nthw_path)
+    problems, outputs = process_nthw_files(args.nthw_path)
     problem_solution_data['problem_statement'].extend(problems)
     problem_solution_data['output'].extend(outputs)
 
     # Save the data to a new Arrow file
-    output_file = "data/problem_solution_data.arrow"
-    save_to_arrow(problem_solution_data, output_file)
+    save_to_arrow(problem_solution_data, args.output_file)
 
-    print(f"Successfully processed data and saved to {output_file}")
+    print(f"Successfully processed data and saved to {args.output_file}")

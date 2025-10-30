@@ -1,6 +1,11 @@
 import pyarrow as pa
+import argparse
 
-output_file = "data/problem_solution_data.arrow"
+parser = argparse.ArgumentParser()
+parser.add_argument('--file_path', type=str, default='data/problem_solution_data.arrow')
+args = parser.parse_args()
+
+output_file = args.file_path
 
 with pa.OSFile(output_file, 'rb') as source:
     table = pa.ipc.open_file(source).read_all()

@@ -1,8 +1,13 @@
 import pyarrow as pa
 import pandas as pd
+import argparse
 
 # Read the Arrow file
-with pa.OSFile('data/nthw_data.arrow', 'rb') as source:
+parser = argparse.ArgumentParser()
+parser.add_argument('--file_path', type=str, default='data/nthw_data.arrow')
+args = parser.parse_args()
+
+with pa.OSFile(args.file_path, 'rb') as source:
     table = pa.ipc.open_file(source).read_all()
 
 # Convert the table to a pandas DataFrame
@@ -13,4 +18,3 @@ for i, row in enumerate(df['content'].head(10)):
     print(f"--- Entry {i+1} ---")
     print(row)
     print("\n")
-

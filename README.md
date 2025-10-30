@@ -82,6 +82,84 @@ Many of the Python scripts in this project now accept command-line arguments to 
 
 Fork, create a branch, commit changes, and submit a PR. Follow the existing code style.
 
+## Free GPU Options for Fine-Tuning
+
+Since Hugging Face Spaces might not always provide GPU access for fine-tuning, here are some alternative free (or free-tier) platforms you can use:
+
+### 1. Google Colab
+
+Google Colab offers free access to GPUs (T4, V100, A100 depending on availability and tier). It's ideal for experimenting and fine-tuning smaller models.
+
+**Instructions:**
+
+1.  **Open a new Colab Notebook:** Go to [Google Colab](https://colab.research.google.com/) and create a new notebook.
+2.  **Change Runtime Type:** Go to `Runtime > Change runtime type` and select `GPU` as the hardware accelerator.
+3.  **Mount Google Drive (Optional but Recommended):** This allows you to persist your data and models.
+    ```python
+    from google.colab import drive
+    drive.mount('/content/drive')
+    # Your project will be accessible at /content/drive/MyDrive/Terminus (or wherever you clone it)
+    ```
+4.  **Clone the Repository:**
+    ```bash
+    !git clone https://github.com/Julien-ser/Terminus.git
+    %cd Terminus
+    ```
+5.  **Install Dependencies:**
+    ```bash
+    !pip install -r requirements.txt
+    ```
+6.  **Set Hugging Face Token:**
+    ```python
+    import os
+    os.environ["HF_TOKEN"] = "your_hugging_face_token"
+    # Or directly in bash: !export HF_TOKEN=your_hugging_face_token
+    ```
+7.  **Prepare Data (if needed):** If your data is not already in the correct Arrow format, you can run `reformat_data.py`.
+    ```bash
+    !python3 reformat_data.py --learning_files "/content/drive/MyDrive/path/to/learning_summary.md" "/content/drive/MyDrive/path/to/red_blue_team_skills.md" --nthw_path "/content/drive/MyDrive/path/to/NTHW" --output_file "/content/drive/MyDrive/path/to/problem_solution_data.arrow"
+    ```
+8.  **Run Fine-Tuning:**
+    ```bash
+    !python3 fine_tuning.py --dataset_path "/content/drive/MyDrive/path/to/problem_solution_data.arrow"
+    ```
+9.  **Save Fine-Tuned Model:** The fine-tuned model will be saved to the `output_dir` specified in `config.yaml`. Ensure this path is within your mounted Google Drive if you want to persist it.
+
+### 2. Kaggle Notebooks
+
+Kaggle provides free access to GPUs (P100, T4) for its notebooks, often with longer session times than Colab.
+
+**Instructions:**
+
+1.  **Create a new Kaggle Notebook:** Go to [Kaggle](https://www.kaggle.com/code) and create a new notebook.
+2.  **Enable GPU:** In the notebook settings (usually on the right sidebar), set the accelerator to `GPU`.
+3.  **Add Data:**
+    *   **Upload as Dataset:** For larger datasets, it's best to upload them as a Kaggle Dataset. Then, you can add this dataset to your notebook.
+    *   **Direct Upload:** For smaller files, you can upload them directly to the notebook environment.
+4.  **Clone the Repository:**
+    ```bash
+    !git clone https://github.com/Julien-ser/Terminus.git
+    %cd Terminus
+    ```
+5.  **Install Dependencies:**
+    ```bash
+    !pip install -r requirements.txt
+    ```
+6.  **Set Hugging Face Token:**
+    ```python
+    import os
+    os.environ["HF_TOKEN"] = "your_hugging_face_token"
+    ```
+7.  **Prepare Data (if needed):** Adjust paths to your Kaggle input data.
+    ```bash
+    !python3 reformat_data.py --learning_files "/kaggle/input/your-dataset-name/learning_summary.md" ... --output_file "problem_solution_data.arrow"
+    ```
+8.  **Run Fine-Tuning:**
+    ```bash
+    !python3 fine_tuning.py --dataset_path "problem_solution_data.arrow"
+    ```
+9.  **Save Fine-Tuned Model:** Models saved in the `/kaggle/working/` directory will be available as output files for your notebook.
+
 ## License
 
 MIT License.

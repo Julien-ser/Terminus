@@ -16,11 +16,11 @@ Red teams simulate attacks to identify vulnerabilities. Key skills include:
 
 ### Red Team Tools
 
-*   **Metasploit:** A popular penetration testing framework.
-*   **Burp Suite:** A suite of tools for web application security testing.
-*   **Nmap:** A network scanner for discovering hosts and services.
-*   **Wireshark:** A network protocol analyzer.
-*   **John the Ripper:** A password cracking tool.
+*   **Metasploit:** A popular penetration testing framework. Use case: Exploiting a vulnerable SMB service on a Windows server using the EternalBlue module to gain remote code execution.
+*   **Burp Suite:** A suite of tools for web application security testing. Use case: Intercepting and modifying HTTP requests to test for SQL injection vulnerabilities in a login form.
+*   **Nmap:** A network scanner for discovering hosts and services. Use case: Scanning a target network to identify open ports, running services, and potential vulnerabilities like unpatched SSH servers.
+*   **Wireshark:** A network protocol analyzer. Use case: Capturing and analyzing network traffic to identify unencrypted credentials or sensitive data being transmitted.
+*   **John the Ripper:** A password cracking tool. Use case: Cracking hashed passwords from a leaked database dump to demonstrate weak password policies.
 
 ## Blue Team Skills (Defensive Security)
 
@@ -36,8 +36,8 @@ Blue teams defend against attacks and protect an organization's assets. Key skil
 
 ### Blue Team Tools
 
-*   **Splunk:** A popular SIEM and log management platform.
-*   **Wireshark:** A network protocol analyzer.
-*   **Snort:** An open-source Intrusion Detection System (IDS).
-*   **Zeek (formerly Bro):** A network security monitoring platform.
-*   **Volatility:** A memory forensics framework.
+*   **Splunk:** A popular SIEM and log management platform. Use case: Creating custom dashboards to monitor failed login attempts and detect brute-force attacks in real-time.
+*   **Wireshark:** A network protocol analyzer. Use case: Analyzing captured network packets to identify and block malicious traffic, such as data exfiltration attempts.
+*   **Snort:** An open-source Intrusion Detection System (IDS). Use case: Configuring rules to detect and alert on known attack patterns, like SQL injection attempts in web traffic.
+*   **Zeek (formerly Bro):** A network security monitoring platform. Use case: Monitoring network logs for indicators of compromise, such as unusual outbound connections to command and control servers.
+*   **Volatility:** A memory forensics framework. Use case: Analyzing memory dumps from compromised systems to extract malware samples and understand the attacker's persistence mechanisms.
